@@ -44,7 +44,7 @@ RUN /usr/local/python-3.8.1/bin/python3 -m pip install --upgrade pip && \
 
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
-CMD ["./build_scripts/server"]
+CMD ["./build_scripts/run_server"]
 
 ENV JUDGE0_VERSION "1.11.0"
 LABEL version=$JUDGE0_VERSION
@@ -65,7 +65,7 @@ RUN apt-get update && \
 RUN groupadd crond-users && \
     chgrp crond-users /var/run/ && \
     usermod -a -G crond-users $DEV_USER 
-    
+
 USER $DEV_USER
 
 CMD ["sleep", "infinity"]
