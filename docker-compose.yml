@@ -20,13 +20,23 @@ services:
 
   workers:
     image: judge0/api:latest
-    command: ["./scripts/workers"]
+    command: ["./build_scripts/workers"]
     volumes:
       - ./judge0.conf:/judge0.conf:ro
     privileged: true
     <<: *default-logging
     restart: always
 
+  mysql:
+    image: mysql:5.7
+    env_file: judge0-api.conf
+    volumes:
+    - ./sql_executors/support_resources/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    - db_data:/var/lib/mysql
+    expose:
+      - "3306"
+    restart: always
+  
   db:
     image: postgres:9.6
     env_file: judge0.conf

@@ -1,0 +1,1 @@
+CREATE USER brhire identified by 'yuba2g7u632bsuyzt2hz' ;

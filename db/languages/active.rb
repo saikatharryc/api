@@ -356,5 +356,12 @@
     id: 89,
     name: "Multi-file program",
     is_archived: false,
+  },
+  {
+    id: 90,
+    name: "MySQL (5.7)",
+    is_archived: false,
+    source_file: "main.json",
+    run_cmd: "/usr/local/python-3.8.1/bin/python3 /usr/src/api/sql_executors/mysql_exec.py main.json --pretty"
   }
 ]

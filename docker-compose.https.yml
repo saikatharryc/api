@@ -45,7 +45,7 @@ services:
 
   workers:
     image: judge0/api:latest
-    command: ["./scripts/workers"]
+    command: ["./build_scripts/workers"]
     volumes:
       - ./judge0.conf:/judge0.conf:ro
     privileged: true

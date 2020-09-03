@@ -1,7 +1,7 @@
 #!/bin/bash
 # Script for creating release bundle.
 #
-# Usage: ./scripts/dev/bundle
+# Usage: ./build_scripts/dev/bundle
 #
 set -e
 

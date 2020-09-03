@@ -2,7 +2,7 @@
 # Script for removing Judge0 development
 # environment (containers and volumes).
 #
-# Usage: ./scripts/dev/clean
+# Usage: ./build_scripts/dev/clean
 #
 docker-compose -f docker-compose.dev.yml down
 docker-compose -f docker-compose.dev.yml down -v

@@ -9,3 +9,4 @@ log/*
 scripts/dev/
 srv/
 tmp/*
+sql_executors/__pycache__

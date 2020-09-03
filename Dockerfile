@@ -14,7 +14,9 @@ ENV GEM_HOME "/opt/.gem/"
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-      cron \
+        cron \
+      python-pip  \
+      python3-pip \
       libpq-dev \
       sudo && \
     rm -rf /var/lib/apt/lists/* && \
@@ -35,8 +37,14 @@ RUN cat /etc/cron.d/* | crontab -
 
 COPY . .
 
+RUN /usr/local/python-3.8.1/bin/python3 -m pip install --upgrade pip && \
+    /usr/local/python-3.8.1/bin/python3 -m pip install -r ./sql_executors/requirements.txt && \
+    pip3 install pandas numpy && \
+    pip2 install pandas numpy 
+
+
 ENTRYPOINT ["./docker-entrypoint.sh"]
-CMD ["./scripts/server"]
+CMD ["./build_scripts/server"]
 
 ENV JUDGE0_VERSION "1.11.0"
 LABEL version=$JUDGE0_VERSION
