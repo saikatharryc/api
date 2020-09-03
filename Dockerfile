@@ -37,7 +37,8 @@ RUN cat /etc/cron.d/* | crontab -
 
 COPY . .
 
-RUN /usr/local/python-3.8.1/bin/python3 -m pip install --upgrade pip && \
+RUN chmod -R 755 ./docker-entrypoint.sh && \
+    /usr/local/python-3.8.1/bin/python3 -m pip install --upgrade pip && \
     /usr/local/python-3.8.1/bin/python3 -m pip install -r ./sql_executors/requirements.txt && \
     pip3 install pandas numpy && \
     pip2 install pandas numpy 
@@ -59,6 +60,9 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         vim && \
     useradd -u $DEV_USER_ID -m -r $DEV_USER && \
+    addgroup crond-users && \
+    chgrp crond-users /var/run/crond.pid && \
+    usermod -a -G crond-users $DEV_USER && \
     echo "$DEV_USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers
 
 USER $DEV_USER
