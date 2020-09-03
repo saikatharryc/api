@@ -43,29 +43,30 @@ RUN /usr/local/python-3.8.1/bin/python3 -m pip install --upgrade pip && \
     pip2 install pandas numpy 
 
 
-ENTRYPOINT ["./docker-entrypoint.sh"]
-CMD ["./build_scripts/run_server"]
+# ENTRYPOINT ["./docker-entrypoint.sh"]
 
 ENV JUDGE0_VERSION "1.11.0"
 LABEL version=$JUDGE0_VERSION
 
-
-FROM production AS development
-
-ARG DEV_USER=judge0
-ARG DEV_USER_ID=1000
+EXPOSE 3000
 
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-        vim && \
-    useradd -u $DEV_USER_ID -m -r $DEV_USER && \
-    echo "$DEV_USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers
+# FROM production AS development
 
-RUN groupadd crond-users && \
-    chgrp crond-users /var/run/ && \
-    usermod -a -G crond-users $DEV_USER 
+# ARG DEV_USER=judge0
+# ARG DEV_USER_ID=1000
 
-USER $DEV_USER
 
-CMD ["sleep", "infinity"]
+# RUN apt-get update && \
+#     apt-get install -y --no-install-recommends \
+#         vim && \
+#     useradd -u $DEV_USER_ID -m -r $DEV_USER && \
+#     echo "$DEV_USER ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers
+
+# RUN groupadd crond-users && \
+#     chgrp crond-users /var/run/ && \
+#     usermod -a -G crond-users $DEV_USER 
+
+# USER $DEV_USER
+
+# CMD ["sleep", "infinity"]
